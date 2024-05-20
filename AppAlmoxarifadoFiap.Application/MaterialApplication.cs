@@ -16,4 +16,20 @@ public class MaterialApplication<TContext> : BaseApplication<TContext, Material>
     {
         _service = service;
     }
+
+    public override async Task<Material> SaveAsync(Material entity)
+    {
+        await _service.SaveAsync(entity);
+        _unitOfWork.Commit();
+
+        return entity;
+    }
+
+    public override async Task<Material> UpdateAsync(Material entity)
+    {
+        await _service.UpdateAsync(entity);
+        _unitOfWork.Commit();
+
+        return entity;
+    }
 }
