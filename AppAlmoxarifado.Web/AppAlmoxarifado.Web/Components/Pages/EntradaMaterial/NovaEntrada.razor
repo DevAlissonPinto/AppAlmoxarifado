@@ -1,0 +1,90 @@
+﻿@page "/almoxarifado/entrada-material/nova"
+
+<PageTitle>Siss Saúde - Nova Entrada de Material</PageTitle>
+
+<div class="pagetitle">
+    <h1>Cadastrar Material</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/"><i class="bi bi-house-fill"></i></a></li>
+            <li class="breadcrumb-item"><a href="/">Almoxarifado</a></li>
+            <li class="breadcrumb-item"><a href="almoxarifado/entrada-material">Entrada de Material</a></li>
+            <li class="breadcrumb-item active">Nova Entrada</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="card">
+    <div class="card-header">Entrada de Material</div>
+    <div class="card-body">
+        <EditForm Model="@ModelSearch">
+            <div class="row">
+                <div class="col-md-1 pb-2">
+                    <label class="form-label">Data Entrada:</label>
+                    <InputDate class="form-control" @bind-Value="DataEntrada" />
+                    @* <ValidationMessage For="@(() => Model.Title)" /> *@
+                </div>
+                <div class="col-md-4 pb-2">
+                    <label class="form-label">Almoxarifado:</label>
+                    <InputSelect @bind-Value="@ModelSearchSel" class="form-control form-select">
+                        @* @foreach (var category in Categories)
+                        {
+                        <option value="@category.Id">
+                        @category.Title
+                        </option>
+                        } *@
+                    </InputSelect>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Tipo do Movimento:</label>
+                    <InputSelect @bind-Value="@ModelSearchSel" class="form-control form-select">
+                        @* @foreach (var category in Categories)
+                        {
+                        <option value="@category.Id">
+                        @category.Title
+                        </option>
+                        } *@
+                    </InputSelect>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Material:</label>
+                    <InputSelect @bind-Value="@ModelSearchSel" class="form-control form-select">
+                        @* @foreach (var category in Categories)
+                        {
+                        <option value="@category.Id">
+                        @category.Title
+                        </option>
+                        } *@
+                    </InputSelect>
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">Quantidade:</label>
+                    <InputNumber @bind-Value="@ModelSearchSel" class="form-control form-select">
+
+                    </InputNumber>
+                </div>
+            </div>
+            <br />
+            <div class="d-flex flex-row-reverse bd-highlight">
+                <div class="p-2 bd-highlight">
+                    <a href="/almoxarifado/entrada-material" class="btn btn-primary">
+                        <i class="bi bi-arrow-right-circle"></i> Salvar
+                    </a>
+                </div>
+
+                <div class="p-2 bd-highlight">
+                    <a href="/almoxarifado/entrada-material" class="btn btn-secondary">
+                        <i class="bi bi-dash-circle"></i> Cancelar
+                    </a>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+
+@code {
+    public string ModelSearch { get; set; } = "";
+    public DateTime DataEntrada { get; set; } = DateTime.Now;
+    public int ModelSearchSel { get; set; } = 0;
+}
