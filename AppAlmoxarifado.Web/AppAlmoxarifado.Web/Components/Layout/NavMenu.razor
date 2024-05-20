@@ -1,0 +1,51 @@
+﻿<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <!-- Dashboard SAMU Nav -->
+        <li class="nav-item">
+            <a asp-controller="Dashboard" asp-action="Index" class="nav-link">
+                <i class="ri ri-dashboard-line"></i>
+                <span>Almoxarifado</span>
+            </a>
+        </li><!-- End Dashboard SAMU Nav -->
+        <!-- SAMU Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#samu-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-asterisk"></i><span>Operação</span><i class="bi bi-chevron-up ms-auto"></i>
+            </a>
+
+            <ul id="samu-nav" class="nav-content show" data-bs-parent="#sidebar-nav">
+                <li>
+                    <NavLink href="almoxarifado/entrada-material">
+                        <i class="bi bi-phone-vibrate"></i><span>Entrada de Material</span>
+                    </NavLink>
+                </li>
+
+                @* <li>
+                <a asp-controller="Ocorrencia" asp-action="Index">
+                <i class="bi bi-person-lines-fill"></i><span>Ocorrência</span>
+                </a>
+                </li> *@
+            </ul>
+        </li><!-- End SAMU Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-toggle="collapse" href="#configuracao-nav">
+                <i class="bi bi-gear"></i><span>Configuração</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="configuracao-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <NavLink href="almoxarifado">
+                        <i class="bi bi-gear"></i><span>Almoxarifado</span>
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink href="material">
+                        <i class="bi bi-gear"></i><span>Material</span>
+                    </NavLink>
+                </li>
+            </ul>
+        </li><!-- End Configuração Nav -->
+    </ul>
+
+</aside>
