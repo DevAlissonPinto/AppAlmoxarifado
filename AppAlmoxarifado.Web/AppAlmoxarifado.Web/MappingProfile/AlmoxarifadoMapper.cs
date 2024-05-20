@@ -8,7 +8,6 @@ public class AlmoxarifadoMapper : Profile
 {
     public AlmoxarifadoMapper()
     {
-        CreateMap<AlmoxarifadoViewModel, Almoxarifado>();
-        CreateMap<Almoxarifado, AlmoxarifadoViewModel>();
+        CreateMap<AlmoxarifadoViewModel, Almoxarifado>().ReverseMap();
     }
 }

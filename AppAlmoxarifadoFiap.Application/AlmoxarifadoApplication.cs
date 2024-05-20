@@ -16,4 +16,20 @@ public class AlmoxarifadoApplication<TContext> : BaseApplication<TContext, Almox
     {
         _service = service;
     }
+
+    public override async Task<Almoxarifado> SaveAsync(Almoxarifado entity)
+    {
+        await _service.SaveAsync(entity);
+        _unitOfWork.Commit();
+
+        return entity;
+    }
+
+    public override async Task<Almoxarifado> UpdateAsync(Almoxarifado entity)
+    {
+        await _service.UpdateAsync(entity);
+        _unitOfWork.Commit();
+
+        return entity;
+    }
 }
