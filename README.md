@@ -12,14 +12,15 @@ Um Sistema de Gestão de Estoque (SGE) é uma solução de software projetada pa
 ## Repositories
 * Script SQL Data Base [link](https://github.com/DevAlissonPinto/AppAlmoxarifado/blob/master/AppAlmoxarifadoFiap.Infra.Repository/Sql/script_banco.txt)
 * ASP.NET CORE BLAZOR  [link](https://github.com/DevAlissonPinto/AppAlmoxarifado)
+* Teste de Integração com API Externa CEP 
 
 ## Development 
 
-Para executar esses projetos você precisa seguir as etapas abaixo:
+Para executar esse projeto você precisa seguir as etapas abaixo:
 
 * Abrir a solution AppAlmoxarifado.sln com o visual studio 2022
 * Configurar o projeto AppAlmoxarifado.Web para serem executado como startup projects
-* Abri Package Manager Console e deixar como Defult project: 'AppAlmoxarifado\AppAlmoxarifado.Web' e executar o comando Update-Database
+* Abri Package Manager Console e deixar como Defult project: 'Infra\AppAlmoxarifado.Infra.Repository' e executar o comando Update-Database
 * Executar o projeto pressionando o F5
 
 ### AppAlmoxarifado.Tests
@@ -28,11 +29,10 @@ Este projeto de teste é construído usando xUnit.NET para testar o aplicativo A
 
 ## Configuração
 
-Certifique-se de ter .NET Core SDK instalado e VS 2022 community.
+Certifique-se de ter .NET Core 8 SDK instalado e VS 2022 community.
 
 ### Como Executar os Testes
 
 1. Abra o terminal.
-2. Navegue até o diretório do projeto de teste.
-3. Execute o seguinte comando:
-4. dotnet test
+2. Navegue até o diretório do projeto de teste (AppAlmoxarifado.Tests).
+3. Execute o seguinte comando: dotnet test
