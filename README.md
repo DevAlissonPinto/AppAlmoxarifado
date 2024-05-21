@@ -12,7 +12,8 @@ Um Sistema de Gestão de Estoque (SGE) é uma solução de software projetada pa
 ## Repositories
 * Script SQL Data Base [link](https://github.com/DevAlissonPinto/AppAlmoxarifado/blob/master/AppAlmoxarifadoFiap.Infra.Repository/Sql/script_banco.txt)
 * ASP.NET CORE BLAZOR  [link](https://github.com/DevAlissonPinto/AppAlmoxarifado)
-* Teste de Integração com API Externa CEP 
+* Teste de Interações de Lógicas de negócio, camadas de aplicação e banco de dados [link](https://github.com/DevAlissonPinto/AppAlmoxarifado)
+* Teste de Integração com API Externa VIA CEP [link](https://github.com/vroliveira/TesteIntegracaoViaCep)
 
 ## Development 
 
