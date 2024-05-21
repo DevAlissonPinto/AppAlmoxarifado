@@ -15,15 +15,7 @@ public class MovimentacaoEstoqueViewModel
     // Método para converter ViewModel em Model
     public MovimentacaoEstoque ToModel()
     {
-        return new MovimentacaoEstoque
-        {
-            EstoqueId = this.EstoqueId,
-            MaterialId = this.MaterialId,
-            DataMovimentacao = this.DataMovimentacao,
-            Quantidade = this.Quantidade,
-            Preco = this.Preco,
-            TipoMovimentacao = this.TipoMovimentacao
-        };
+        return new MovimentacaoEstoque(this.Quantidade, this.Preco, this.DataMovimentacao, this.TipoMovimentacao, this.EstoqueId, this.MaterialId);
     }
 }
 
