@@ -38,13 +38,13 @@ public class Material : EntityBase
 
         if (string.IsNullOrEmpty(Codigo))
         {
-            msg = "O Codigo deve ser preenchido";
+            msg = "O Código deve ser preenchido";
             throw new Exception(msg);
         }
 
         if (Codigo.Length <= 2 && Nome.Length >= 10)
         {
-            msg = "O Codigo deve ter entre 2 e 10 caracteres";
+            msg = "O Código deve ter entre 2 e 10 caracteres";
             throw new Exception(msg);
         }
     }
