@@ -15,7 +15,10 @@ public class AlmoxarifadoContext : DbContext, IUnitOfWork<AlmoxarifadoContext>
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.ApplyConfiguration(new AlmoxarifadoMap());
-        modelBuilder.ApplyConfiguration(new MaterialMap());
+        //modelBuilder.ApplyConfiguration(new AlmoxarifadoMap());
+        //modelBuilder.ApplyConfiguration(new MaterialMap());
+
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AlmoxarifadoContext).Assembly);
+
     }
 }

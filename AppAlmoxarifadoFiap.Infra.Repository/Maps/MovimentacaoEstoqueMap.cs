@@ -4,15 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Regulacao.Repository.Maps;
 
-class AlmoxarifadoMap : IEntityTypeConfiguration<Almoxarifado>
+public class MovimentacaoEstoqueMap : IEntityTypeConfiguration<MovimentacaoEstoque>
 {
-    public void Configure(EntityTypeBuilder<Almoxarifado> builder)
+    public void Configure(EntityTypeBuilder<MovimentacaoEstoque> builder)
     {
-        builder.ToTable("Almoxarifado", "dbo");
+        builder.ToTable("MovimentacaoEstoque", "dbo");
         builder.HasKey(e => e.Id);
-        builder.Property(e => e.Id).HasColumnName("AlmoxarifadoId").HasColumnType("int");
-
-        builder.Property(e => e.Nome).HasColumnName("Nome").HasColumnType("varchar").HasMaxLength(50);
+        builder.Property(e => e.Id).HasColumnName("MovimentacaoEstoqueId").HasColumnType("int");
 
         builder.Property(e => e.DataInclusao).HasColumnName("DataInclusao").HasColumnType("datetime").HasDefaultValueSql("GetDate()");
         builder.Property(e => e.UsuarioInclusao).HasColumnName("UsuarioInclusao").HasColumnType("int");

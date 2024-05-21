@@ -8,7 +8,6 @@ public class MaterialMapper : Profile
 {
     public MaterialMapper()
     {
-        CreateMap<MaterialViewModel, Material>();
-        CreateMap<Material, MaterialViewModel>();
+        CreateMap<MaterialViewModel, Material>().ReverseMap();
     }
 }

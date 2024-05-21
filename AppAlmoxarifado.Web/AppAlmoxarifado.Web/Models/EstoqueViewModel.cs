@@ -4,7 +4,7 @@ using AppAlmoxarifado.Domain.Entities;
 
 namespace AppAlmoxarifado.Web.Models;
 
-public class AlmoxarifadoViewModel
+public class EstoqueViewModel
 {
     public int Id { get; set; }
 

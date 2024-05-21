@@ -4,21 +4,21 @@ using AppAlmoxarifado.Domain.Interfaces.Repositories;
 using AppAlmoxarifado.Domain.Interfaces.Services;
 namespace AppAlmoxarifado.Domain.Services;
 
-public class AlmoxarifadoService<TContext> : BaseService<TContext, Almoxarifado>, IAlmoxarifadoService<TContext>
+public class EstoqueService<TContext> : BaseService<TContext, Estoque>, IEstoqueService<TContext>
     where TContext : IUnitOfWork<TContext>
 {
-    private readonly IAlmoxarifadoRepository<TContext> _repository;
+    private readonly IEstoqueRepository<TContext> _repository;
 
-    public AlmoxarifadoService(
-                        IAlmoxarifadoRepository<TContext> repository,
+    public EstoqueService(
+                        IEstoqueRepository<TContext> repository,
                             IUnitOfWork<TContext> unitOfWork) : base(repository, unitOfWork)
     {
         _repository = repository;
     }
 
-    public override async Task<Almoxarifado> SaveAsync(Almoxarifado entidade)
+    public override async Task<Estoque> SaveAsync(Estoque entidade)
     {
-        bool existeAlmoxarifadoNome = await ValidarAlmoxarifadoNomeExistente(entidade);
+        bool existeAlmoxarifadoNome = await ValidarEstoqueNomeExistente(entidade);
         if (existeAlmoxarifadoNome)
             throw new Exception("Já existe um almoxarifado com esse nome!");
 
@@ -28,9 +28,9 @@ public class AlmoxarifadoService<TContext> : BaseService<TContext, Almoxarifado>
         return entidade;
     }
 
-    public override async Task<Almoxarifado> UpdateAsync(Almoxarifado entidade)
+    public override async Task<Estoque> UpdateAsync(Estoque entidade)
     {
-        bool existeAlmoxarifadoNome = await ValidarAlmoxarifadoNomeExistente(entidade);
+        bool existeAlmoxarifadoNome = await ValidarEstoqueNomeExistente(entidade);
         if (existeAlmoxarifadoNome)
             throw new Exception("Já existe um almoxarifado com esse nome!");
 
@@ -40,7 +40,7 @@ public class AlmoxarifadoService<TContext> : BaseService<TContext, Almoxarifado>
         return entidade;
     }
 
-    public async Task<bool> ValidarAlmoxarifadoNomeExistente(Almoxarifado entidade)
+    public async Task<bool> ValidarEstoqueNomeExistente(Estoque entidade)
     {
         var almoxarifados = await _repository.GetAllAsync(x => x.Nome.Equals(entidade.Nome));
         return almoxarifados.Any(x => x.Id != entidade.Id);

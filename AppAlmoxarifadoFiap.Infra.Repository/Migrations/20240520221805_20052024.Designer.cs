@@ -4,6 +4,7 @@ using AppAlmoxarifado.Infra.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppAlmoxarifado.Infra.Repository.Migrations
 {
     [DbContext(typeof(AlmoxarifadoContext))]
-    partial class AlmoxarifadoContextModelSnapshot : ModelSnapshot
+    [Migration("20240520221805_20052024")]
+    partial class _20052024
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,7 +30,7 @@ namespace AppAlmoxarifado.Infra.Repository.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("EstoqueId");
+                        .HasColumnName("AlmoxarifadoId");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
@@ -63,7 +66,65 @@ namespace AppAlmoxarifado.Infra.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Estoque", "dbo");
+                    b.ToTable("Almoxarifado", "dbo");
+                });
+
+            modelBuilder.Entity("AppAlmoxarifado.Domain.Entities.EstoqueMaterial", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("EstoqueMaterialId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Ativo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true)
+                        .HasColumnName("Ativo");
+
+                    b.Property<DateTime?>("DataAlteracao")
+                        .HasColumnType("datetime")
+                        .HasColumnName("DataAlteracao");
+
+                    b.Property<DateTime>("DataInclusao")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("DataInclusao")
+                        .HasDefaultValueSql("GetDate()");
+
+                    b.Property<int>("EstoqueId")
+                        .HasColumnType("int")
+                        .HasColumnName("EstoqueId");
+
+                    b.Property<int>("MaterialId")
+                        .HasColumnType("int")
+                        .HasColumnName("MaterialId");
+
+                    b.Property<decimal>("PrecoMedio")
+                        .HasColumnType("decimal")
+                        .HasColumnName("PrecoMedio");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int")
+                        .HasColumnName("Quantidade");
+
+                    b.Property<int?>("UsuarioAlteracao")
+                        .HasColumnType("int")
+                        .HasColumnName("UsuarioAlteracao");
+
+                    b.Property<int?>("UsuarioInclusao")
+                        .HasColumnType("int")
+                        .HasColumnName("UsuarioInclusao");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EstoqueId");
+
+                    b.HasIndex("MaterialId");
+
+                    b.ToTable("EstoqueMaterial", "dbo");
                 });
 
             modelBuilder.Entity("AppAlmoxarifado.Domain.Entities.Material", b =>
@@ -144,10 +205,7 @@ namespace AppAlmoxarifado.Infra.Repository.Migrations
                     b.Property<DateTime>("DataMovimentacao")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EstoqueId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MaterialId")
+                    b.Property<int>("EstoqueMaterialId")
                         .HasColumnType("int");
 
                     b.Property<decimal?>("Preco")
@@ -156,7 +214,10 @@ namespace AppAlmoxarifado.Infra.Repository.Migrations
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.Property<int>("TipoMovimentacao")
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipoMovimentacaoId")
                         .HasColumnType("int");
 
                     b.Property<int?>("UsuarioAlteracao")
@@ -169,14 +230,12 @@ namespace AppAlmoxarifado.Infra.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EstoqueId");
-
-                    b.HasIndex("MaterialId");
+                    b.HasIndex("EstoqueMaterialId");
 
                     b.ToTable("MovimentacaoEstoque", "dbo");
                 });
 
-            modelBuilder.Entity("AppAlmoxarifado.Domain.Entities.MovimentacaoEstoque", b =>
+            modelBuilder.Entity("AppAlmoxarifado.Domain.Entities.EstoqueMaterial", b =>
                 {
                     b.HasOne("AppAlmoxarifado.Domain.Entities.Estoque", "Estoque")
                         .WithMany()
@@ -193,6 +252,17 @@ namespace AppAlmoxarifado.Infra.Repository.Migrations
                     b.Navigation("Estoque");
 
                     b.Navigation("Material");
+                });
+
+            modelBuilder.Entity("AppAlmoxarifado.Domain.Entities.MovimentacaoEstoque", b =>
+                {
+                    b.HasOne("AppAlmoxarifado.Domain.Entities.EstoqueMaterial", "EstoqueMaterial")
+                        .WithMany()
+                        .HasForeignKey("EstoqueMaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EstoqueMaterial");
                 });
 #pragma warning restore 612, 618
         }

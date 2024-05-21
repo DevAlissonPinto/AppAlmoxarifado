@@ -4,17 +4,17 @@ using AppAlmoxarifado.Domain.Exceptions.Base;
 
 namespace AppAlmoxarifado.Domain.Entities;
 
-public class Almoxarifado : EntityBase
+public class Estoque : EntityBase
 {
     public string Nome { get; set; }
 
-    public Almoxarifado(string nome)
+    public Estoque(string nome)
     {
         Nome = nome;
         ValidarNome();
     }
 
-    protected Almoxarifado() { }
+    protected Estoque() { }
 
     private void ValidarNome()
     {

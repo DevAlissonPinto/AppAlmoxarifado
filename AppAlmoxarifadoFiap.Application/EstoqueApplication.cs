@@ -6,18 +6,18 @@ using AppAlmoxarifado.Domain.Interfaces.Services;
 
 namespace AppAlmoxarifado.Application;
 
-public class AlmoxarifadoApplication<TContext> : BaseApplication<TContext, Almoxarifado>, IAlmoxarifadoApplication<TContext>
+public class EstoqueApplication<TContext> : BaseApplication<TContext, Estoque>, IEstoqueApplication<TContext>
     where TContext : IUnitOfWork<TContext>
 {
-    private readonly IAlmoxarifadoService<TContext> _service;
+    private readonly IEstoqueService<TContext> _service;
 
-    public AlmoxarifadoApplication(IUnitOfWork<TContext> context, IAlmoxarifadoService<TContext> service)
+    public EstoqueApplication(IUnitOfWork<TContext> context, IEstoqueService<TContext> service)
         : base(context, service)
     {
         _service = service;
     }
 
-    public override async Task<Almoxarifado> SaveAsync(Almoxarifado entity)
+    public override async Task<Estoque> SaveAsync(Estoque entity)
     {
         await _service.SaveAsync(entity);
         _unitOfWork.Commit();
@@ -25,7 +25,7 @@ public class AlmoxarifadoApplication<TContext> : BaseApplication<TContext, Almox
         return entity;
     }
 
-    public override async Task<Almoxarifado> UpdateAsync(Almoxarifado entity)
+    public override async Task<Estoque> UpdateAsync(Estoque entity)
     {
         await _service.UpdateAsync(entity);
         _unitOfWork.Commit();

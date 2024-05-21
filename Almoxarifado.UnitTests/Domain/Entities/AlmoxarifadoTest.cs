@@ -7,7 +7,7 @@ public class AlmoxarifadoTest
     [Fact]
     public void Nome_Deve_Ter_Entre_3_e_50_Caracteres()
     {
-        var almoxarifado = new Almoxarifado("Almoxarifado Central");
+        var almoxarifado = new Estoque("Almoxarifado Central");
 
         Assert.True(almoxarifado.Nome.Length >= 3 && almoxarifado.Nome.Length <= 50);
     }
@@ -18,7 +18,7 @@ public class AlmoxarifadoTest
         string msg = "O Nome deve ter entre 5 e 50 caracteres";
         try
         {
-            var almoxarifado = new Almoxarifado("Alm");
+            var almoxarifado = new Estoque("Alm");
         }
         catch(Exception ex) 
         {

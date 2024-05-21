@@ -6,7 +6,7 @@
 @using AutoMapper
 
 @inject NavigationManager navManager
-@inject IAlmoxarifadoApplication<AlmoxarifadoContext> _almoxarifadoApplication
+@inject IEstoqueApplication<AlmoxarifadoContext> _almoxarifadoApplication
 @inject IMapper _mapper
 
 @rendermode InteractiveServer
@@ -94,7 +94,7 @@
 </div>
 
 @code {
-    private List<AlmoxarifadoViewModel> Almoxarifados { get; set; } = new();
+    private List<EstoqueViewModel> Almoxarifados { get; set; } = new();
     public string Mensagem { get; set; } = string.Empty;
 
     protected override async Task OnInitializedAsync()
@@ -155,7 +155,7 @@
         }
     }
 
-    private async Task<IEnumerable<Almoxarifado>> CarregarAlmoxarifados() => await _almoxarifadoApplication.GetAllAsync(x => x.Ativo);
+    private async Task<IEnumerable<Estoque>> CarregarAlmoxarifados() => await _almoxarifadoApplication.GetAllAsync(x => x.Ativo);
 
-    private void MapperMaterial(IEnumerable<Almoxarifado> almoxarifados) => Almoxarifados = _mapper.Map<List<AlmoxarifadoViewModel>>(almoxarifados);
+    private void MapperMaterial(IEnumerable<Estoque> almoxarifados) => Almoxarifados = _mapper.Map<List<EstoqueViewModel>>(almoxarifados);
 }

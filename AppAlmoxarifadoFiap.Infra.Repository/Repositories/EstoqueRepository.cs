@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AppAlmoxarifado.Infra.Repository.Repositories;
 
-public class AlmoxarifadoRepository<TContext> : BaseRepository<TContext, Almoxarifado>, IAlmoxarifadoRepository<TContext>
+public class EstoqueRepository<TContext> : BaseRepository<TContext, Estoque>, IEstoqueRepository<TContext>
     where TContext : IUnitOfWork<TContext>
 {
-    private DbSet<Almoxarifado> _dbSet => ((AlmoxarifadoContext)UnitOfWork).Set<Almoxarifado>();
+    private DbSet<Estoque> _dbSet => ((AlmoxarifadoContext)UnitOfWork).Set<Estoque>();
 
-    public AlmoxarifadoRepository(IUnitOfWork<TContext> unitOfWork) : base(unitOfWork) { }
+    public EstoqueRepository(IUnitOfWork<TContext> unitOfWork) : base(unitOfWork) { }
 
 }

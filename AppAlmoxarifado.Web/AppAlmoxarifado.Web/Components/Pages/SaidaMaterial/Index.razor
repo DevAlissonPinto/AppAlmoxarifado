@@ -1,5 +1,12 @@
-﻿@page "/almoxarifado/saida-material"
+﻿@page "/SaidaMaterial/Index"
+@using AppAlmoxarifado.Domain.Entities
+@using AppAlmoxarifado.Domain.Enum
+@using AppAlmoxarifado.Domain.Interfaces.Application
+@using AppAlmoxarifado.Infra.Repository.Context
 @using AppAlmoxarifado.Web.Models
+@using AutoMapper
+@inject IMovimentacaoEstoqueApplication<AlmoxarifadoContext> _movimentacaoEstoqueApplication
+@inject IMapper _mapper
 
 <PageTitle>Siss Saúde - Saída de Material</PageTitle>
 
@@ -14,60 +21,79 @@
     </nav>
 </div>
 
-<div class="card">
-    <div class="card-header">Parâmetros de Pesquisa</div>
-    <div class="card-body">
-        <EditForm Model="@ModelSearch">
-            <div class="row">
-                <div class="col-md-2 pb-2">
-                    <label class="form-label">Número do Movimento:</label>
-                    <InputText class="form-control" @bind-Value="ModelSearch.NumeroMovimento" />
-                    @* <ValidationMessage For="@(() => Model.Title)" /> *@
-                </div>
-                <div class="col-md-4 pb-2">
-                    <label class="form-label">Almoxarifado:</label>
-                    <InputSelect @bind-Value="ModelSearch.AlmoxarifadoId" class="form-control form-select">
-                        @* @foreach (var category in Categories)
-                        {
-                        <option value="@category.Id">
-                        @category.Title
-                        </option>
-                        } *@
-                    </InputSelect>
-                </div>
-                <div class="col-md-2 pb-2">
-                    <label class="form-label">Data Inicial:</label>
-                    <InputDate class="form-control" @bind-Value="ModelSearch.DataInicial" />
-                    @* <ValidationMessage For="@(() => Model.Title)" /> *@
-                </div>
-                <div class="col-md-2 pb-2">
-                    <label class="form-label">Data Final:</label>
-                    <InputDate class="form-control" @bind-Value="ModelSearch.DataFinal" />
-                    @* <ValidationMessage For="@(() => Model.Title)" /> *@
-                </div>
-            </div>
-        </EditForm>
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @ErrorMessage
     </div>
-    <div class="card-footer">
-        <div class="text-end mt-4">
-            <a href="/" class="btn btn-primary">
-                <i class="bi bi-search"></i> Pesquisar
-            </a>
-        </div>
-    </div>
-</div>
+}
 
-<div class="card">
+<div class="card mt-4">
     <div class="card-header">Resultado da Pesquisa</div>
+    <div class="card-body">
+        @if (Movimentacoes.Any())
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Data da Movimentação</th>
+                        <th>Almoxarifado</th>
+                        <th>Material</th>
+                        <th>Quantidade</th>
+                        <th>Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var movimentacao in Movimentacoes)
+                    {
+                        <tr>
+                            <td>@movimentacao.DataMovimentacao.ToString("dd/MM/yyyy")</td>
+                            <td>@movimentacao.Estoque?.Nome</td>
+                            <td>@movimentacao.Material?.Nome</td>
+                            <td>@movimentacao.Quantidade</td>
+                            <td>@movimentacao.Preco.ToString("C")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="alert alert-info">Nenhuma movimentação encontrada.</div>
+        }
+    </div>
 </div>
 
 <div class="text-end mt-4">
-    <a href="almoxarifado/saida-material/nova" class="btn btn-primary">
+    <a href="SaidaMaterial/Create" class="btn btn-primary">
         <i class="bi bi-plus-circle"></i> Nova Saída
     </a>
 </div>
 
 @code {
-    public PesaquisaMovimentoViewModel ModelSearch { get; set; } = new PesaquisaMovimentoViewModel();
+    private string ErrorMessage { get; set; } = string.Empty;
+    private List<MovimentacaoEstoqueViewModel> Movimentacoes { get; set; } = new List<MovimentacaoEstoqueViewModel>();
 
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadMovimentacoes();
+    }
+
+    private async Task LoadMovimentacoes()
+    {
+        try
+        {
+            var movimentacoes = await _movimentacaoEstoqueApplication.GetAllAsync(
+                m => m.TipoMovimentacao == TipoMovimentacaoEnum.SAIDA,
+                x => x.Estoque,
+                x => x.Material
+            );
+
+            Movimentacoes = movimentacoes.Select(m => _mapper.Map<MovimentacaoEstoqueViewModel>(m)).ToList();
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = "Erro ao carregar as movimentações: " + ex.Message;
+        }
+    }
 }

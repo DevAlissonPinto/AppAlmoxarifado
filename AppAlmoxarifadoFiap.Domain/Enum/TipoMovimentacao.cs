@@ -1,6 +1,6 @@
 ﻿namespace AppAlmoxarifado.Domain.Enum;
 
-public enum TipoMovimentacao
+public enum TipoMovimentacaoEnum
 {
     ENTRADA = 1,
     SAIDA = 2,

@@ -3,7 +3,7 @@ using AppAlmoxarifado.Domain.Interfaces.Application.Base;
 
 namespace AppAlmoxarifado.Domain.Interfaces.Application;
 
-public interface IAlmoxarifadoApplication<TContext> : IBaseApplication<TContext, Almoxarifado>
+public interface IMovimentacaoEstoqueApplication<TContext> : IBaseApplication<TContext, MovimentacaoEstoque>
 where TContext : IUnitOfWork<TContext>
 {
 

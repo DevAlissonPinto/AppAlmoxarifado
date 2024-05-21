@@ -2,7 +2,7 @@
 
 namespace AppAlmoxarifado.Domain.Interfaces.Repositories;
 
-public interface IAlmoxarifadoRepository<TContext> : IBaseRepository<TContext, Almoxarifado>
+public interface IMovimentacaoEstoqueRepository<TContext> : IBaseRepository<TContext, MovimentacaoEstoque>
     where TContext : IUnitOfWork<TContext>
 {
 }

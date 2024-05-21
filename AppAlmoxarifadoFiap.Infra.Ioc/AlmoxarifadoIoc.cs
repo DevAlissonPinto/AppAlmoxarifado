@@ -25,13 +25,18 @@ public static class AlmoxarifadoIoc
         services.AddScoped(typeof(IBaseService<,>), typeof(BaseService<,>));
         services.AddScoped(typeof(IBaseRepository<,>), typeof(BaseRepository<,>));
 
-        services.AddScoped(typeof(IAlmoxarifadoApplication<>), typeof(AlmoxarifadoApplication<>));
-        services.AddScoped(typeof(IAlmoxarifadoService<>), typeof(AlmoxarifadoService<>));
-        services.AddScoped(typeof(IAlmoxarifadoRepository<>), typeof(AlmoxarifadoRepository<>));
+        services.AddScoped(typeof(IEstoqueApplication<>), typeof(EstoqueApplication<>));
+        services.AddScoped(typeof(IEstoqueService<>), typeof(EstoqueService<>));
+        services.AddScoped(typeof(IEstoqueRepository<>), typeof(EstoqueRepository<>));
 
         services.AddScoped(typeof(IMaterialApplication<>), typeof(MaterialApplication<>));
         services.AddScoped(typeof(IMaterialService<>), typeof(MaterialService<>));
         services.AddScoped(typeof(IMaterialRepository<>), typeof(MaterialRepository<>));
+
+        services.AddScoped(typeof(IMovimentacaoEstoqueApplication<>), typeof(MovimentacaoEstoqueApplication<>));
+        services.AddScoped(typeof(IMovimentacaoEstoqueService<>), typeof(MovimentacaoEstoqueService<>));
+        services.AddScoped(typeof(IMovimentacaoEstoqueRepository<>), typeof(MovimentacaoEstoqueRepository<>));
+
     }
 
 }

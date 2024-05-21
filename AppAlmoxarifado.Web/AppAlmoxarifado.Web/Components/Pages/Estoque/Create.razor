@@ -1,4 +1,4 @@
-﻿@page "/almoxarifado/editar/{Id:int}"
+﻿@page "/almoxarifado/cadastro"
 @using AppAlmoxarifado.Domain.Entities
 @using AppAlmoxarifado.Domain.Interfaces.Application
 @using AppAlmoxarifado.Infra.Repository.Context
@@ -6,7 +6,7 @@
 @using AutoMapper
 
 @inject NavigationManager navManager
-@inject IAlmoxarifadoApplication<AlmoxarifadoContext> _almoxarifadoApplication
+@inject IEstoqueApplication<AlmoxarifadoContext> _almoxarifadoApplication
 @inject IMapper _mapper
 
 @rendermode InteractiveServer
@@ -34,7 +34,7 @@
 <div class="card">
     <div class="card-header">Informações do Almoxarifado</div>
     <div class="card-body">
-
+        
 
         <EditForm Model="@Model" OnValidSubmit="OnValidSubmitAsync">
             <DataAnnotationsValidator />
@@ -66,21 +66,14 @@
 
 
 @code {
-    private AlmoxarifadoViewModel Model { get; set; } = new();
-    private Almoxarifado Almoxarifado { get; set; }
+    private EstoqueViewModel Model { get; set; } = new();
     private string ErrorMessage { get; set; } = string.Empty;
     private bool isConfirming = false;
-
-    [Parameter]
-    public int Id { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         isConfirming = false;
         ErrorMessage = string.Empty;
-
-        Almoxarifado = await _almoxarifadoApplication.GetAsync(Id);
-        Model = _mapper.Map<AlmoxarifadoViewModel>(Almoxarifado);
     }
 
     private async Task OnValidSubmitAsync()
@@ -91,8 +84,9 @@
             ErrorMessage = string.Empty;
             StateHasChanged();
 
-            Almoxarifado.Nome = Model.Nome;
-            await _almoxarifadoApplication.UpdateAsync(Almoxarifado);
+            var almoxarifado = _mapper.Map<Estoque>(Model);
+
+            await _almoxarifadoApplication.SaveAsync(almoxarifado);
 
             navManager.NavigateTo("/almoxarifado");
         }
@@ -100,7 +94,7 @@
         {
             isConfirming = false;
             Console.WriteLine($"Ocorreu um erro: {ex.Message}");
-            ErrorHandling("Failed to process the data. Please try again. " + ex.Message);
+            ErrorHandling("Falha no processamento. Por favor tente novamente. " + ex.Message);
         }
     }
 

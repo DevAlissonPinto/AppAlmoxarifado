@@ -7,3 +7,4 @@ public interface IMaterialService<TContext> : IBaseService<TContext, Material> w
     Task<bool> ValidarMaterialNomeExistente(Material entidade);
     Task<bool> ValidarMaterialCodigoExistente(Material entidade);
 }
+
